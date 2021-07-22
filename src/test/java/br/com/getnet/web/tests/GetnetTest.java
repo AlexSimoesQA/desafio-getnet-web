@@ -1,15 +1,21 @@
 package br.com.getnet.web.tests;
 
-import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import br.com.getnet.web.config.BaseTest;
-import br.com.getnet.web.pages.PageGetnet;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import io.cucumber.junit.CucumberOptions.SnippetType;
 
-public class GetnetTest extends BaseTest {
+@RunWith(Cucumber.class)
+@CucumberOptions(
+	publish = true,
+	plugin = {"pretty"},
+	monochrome = true,
+	glue = "br.com.getnet.web.steps",
+	features = "src/test/resources/features",
+	snippets = SnippetType.CAMELCASE,
+	dryRun = false
+)
+public class GetnetTest {
 
-	@Test
-	public void clickAndAssertCentralDeAjuda() {
-		new PageGetnet(driver)
-		.clickAndAssertCentralDeAjuda();
-	}
 }
