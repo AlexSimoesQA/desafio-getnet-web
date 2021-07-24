@@ -1,5 +1,7 @@
 package br.com.getnet.web.pages;
 
+import static org.junit.Assert.assertEquals;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,6 +15,7 @@ public class GetnetPage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
+	
 	
 	@FindBy(linkText = "Ajuda")
 	public WebElement linkAjuda;
@@ -39,8 +42,16 @@ public class GetnetPage {
 	public WebElement comoAcessoSuperGet;
 	
 	@FindBy(xpath = "//div[contains(@class, 'o-modal__title') and text() = 'Como acesso a minha conta SuperGet?']")
-	public WebElement modalTitle;
+	public WebElement assertModalTitle;
 	
+	@FindBy(xpath = "//a[contains(@href, 'conta-superget') and text()='ver mais']")
+	public WebElement verMaisContaSuperGet;
+	
+	@FindBy(xpath = "//a[contains(@class, 'c-more-answers__question js-modal-price-cards') and text()='Como acesso a minha conta SuperGet?']")
+	public WebElement acessarMinhaContaSuperGet;
+	
+	@FindBy(xpath = "/html/body/div[33]/div")
+	public WebElement modal;
 	
 	
 	
@@ -66,12 +77,21 @@ public class GetnetPage {
 	}
 	
 	public void clickLinkComoAcessoSuperGet() {
-		comoAcessoSuperGet.click();
+		try {
+			comoAcessoSuperGet.click();
+		} catch (Exception e) {
+			acessarMinhaContaSuperGet.click();
+		}
 	}
 	
 	public void assertTextSuperGet() {
-//		assertEquals(modalTitle.getText(), "Como acesso a minha conta SuperGet?");
-//		assertTrue(modalTitle.getText().contains("specific text"));
+		driver.switchTo().activeElement();
+		assertEquals("Como acesso a minha conta SuperGet?", assertModalTitle.getText());
+	}
+	
+	public void clickVerMaisContaSuperGet() {
+		OK.click();
+		verMaisContaSuperGet.click();
 	}
 
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import br.com.getnet.web.pages.GetnetPage;
 import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -46,10 +47,15 @@ public class GetnetSteps {
 		getnetPage.assertTextSuperGet();
 	}
 
+	@When("clicar em {string} no título {string}")
+	public void clicarEmNoTítulo(String string, String string2) {
+		getnetPage.clickVerMaisContaSuperGet();
+	}
+
 
 	@After
-	public void fecharBrowser() {
-		tearDown();
+	public void fecharBrowser(Scenario scenario) {
+		tearDown(scenario);
 	}
 
 
