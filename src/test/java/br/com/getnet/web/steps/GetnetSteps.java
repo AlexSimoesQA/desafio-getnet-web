@@ -2,6 +2,7 @@ package br.com.getnet.web.steps;
 
 import static br.com.getnet.web.config.DriverFactory.getDriver;
 import static br.com.getnet.web.config.DriverFactory.tearDown;
+import static org.junit.Assert.assertEquals;
 
 import org.openqa.selenium.WebDriver;
 
@@ -22,33 +23,33 @@ public class GetnetSteps {
 		getnetPage = new GetnetPage(driver);
 	}
 	
-	@Given("Que eu acessei o site da Getnet")
-	public void queEuAcesseiOSite() {
+	@Given("I access the Getnet website")
+	public void iAccessTheGetnetWebsite() {
 		getnetPage.navigateToGetnet();
 	}
 
-	@When("eu acessar a Central de Ajuda")
-	public void euAcessarACentralDeAjuda() {
+	@When("I access the Central de Ajuda")
+	public void iAcessTheCentralDeAjuda() {
 		getnetPage.clickCentralDeAjuda();
 	}
 	
-	@When("pesquisar por {string}")
-	public void pesquisar_por(String string) {
-		getnetPage.pesquisarSuperGet(string);
+	@When("search for {string}")
+	public void searchFor(String string) {
+		getnetPage.searchSuperGet(string);
 	}
 	
-	@When("clicar no link {string}")
-	public void clicarNoLink(String string) {
-		getnetPage.clickLinkComoAcessoSuperGet();
+	@When("click on the link Como acesso a minha conta SuperGet?")
+	public void clickOnTheLinkComoAcessoAMinhaContaSuperGet() {
+			getnetPage.clickComoAcessoMinhaContaSuperGet();
 	}
 	
-	@Then("deve verificar se o título do modal é {string}")
-	public void deveVerificarSeOTTuloDoModal(String string) {
-		getnetPage.assertTextSuperGet();
+	@Then("must check if the modal title is {string}")
+	public void mustCheckIfTheModalTitleIs(String string) {
+		assertEquals(string, getnetPage.txtModalTitle.getText());
 	}
 
-	@When("clicar em {string} no título {string}")
-	public void clicarEmNoTítulo(String string, String string2) {
+	@When("click on Ver mais in title Conta SuperGet")
+	public void clickOnVerMaisInTitleContaSuperGet() {
 		getnetPage.clickVerMaisContaSuperGet();
 	}
 

@@ -32,7 +32,7 @@ public class DriverFactory {
 		options.addArguments("--disable-notifications");
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(7, TimeUnit.SECONDS);
 	}
 	
 	public static void tearDown(Scenario scenario) {
@@ -42,7 +42,7 @@ public class DriverFactory {
 				TakesScreenshot screenshot = (TakesScreenshot) getDriver();
 				File arquivo = screenshot.getScreenshotAs(OutputType.FILE);
 				FileUtils.copyFile(arquivo, new File("target" + File.separator + "screenshot" +
-						File.separator + scenario.getName() + "is Fail" + ".jpg"));
+						File.separator + scenario.getName() + " - Fail" + ".jpg"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -51,7 +51,7 @@ public class DriverFactory {
 				TakesScreenshot screenshot = (TakesScreenshot) getDriver();
 				File arquivo = screenshot.getScreenshotAs(OutputType.FILE);
 				FileUtils.copyFile(arquivo, new File("target" + File.separator + "screenshot" +
-						File.separator + scenario.getName() + "is Pass" + ".jpg"));
+						File.separator + scenario.getName() + " - Pass" + ".jpg"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

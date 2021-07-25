@@ -1,7 +1,5 @@
 package br.com.getnet.web.pages;
 
-import static org.junit.Assert.assertEquals;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -24,10 +22,10 @@ public class GetnetPage {
 	public WebElement linkCentraldeAjuda;
 	
 	@FindBy(id = "faq-search-input")
-	public WebElement campoBuscar;
+	public WebElement searchField;
 	
 	@FindBy(css = "div.cc-compliance")
-	public WebElement OK;
+	public WebElement policyAndPrivacyTermsOK;
 	
 	@FindBy(xpath = "//button[@class='c-search-dropdown__read-more c-search__read-more js-search-box__button']")
 	public WebElement verMais;
@@ -36,23 +34,19 @@ public class GetnetPage {
 	public WebElement paginaDois;
 	
 	@FindBy(xpath = "//a[@class='o-fixed-footer-slot__close js-fixed-footer-slot__close js-gtm-trigger']")
-	public WebElement fecharPropaganda;
+	public WebElement closeFooter;
 	
 	@FindBy(xpath = "//a[@class='c-search-page__link']/h3[text()='Como acesso a minha conta SuperGet?']")
 	public WebElement comoAcessoSuperGet;
 	
-	@FindBy(xpath = "//div[contains(@class, 'o-modal__title') and text() = 'Como acesso a minha conta SuperGet?']")
-	public WebElement assertModalTitle;
+	@FindBy(css = "body > div.o-modal.is-modal-open > div > div.o-modal__title")
+	public WebElement txtModalTitle;
 	
 	@FindBy(xpath = "//a[contains(@href, 'conta-superget') and text()='ver mais']")
 	public WebElement verMaisContaSuperGet;
 	
 	@FindBy(xpath = "//a[contains(@class, 'c-more-answers__question js-modal-price-cards') and text()='Como acesso a minha conta SuperGet?']")
-	public WebElement acessarMinhaContaSuperGet;
-	
-	@FindBy(xpath = "/html/body/div[33]/div")
-	public WebElement modal;
-	
+	public WebElement comoAcessoMinhaContaSuperGet;
 	
 	
 	public void navigateToGetnet() {
@@ -68,30 +62,25 @@ public class GetnetPage {
 		
 	}
 	
-	public void pesquisarSuperGet(String string) {
-		OK.click();
-		campoBuscar.sendKeys(string);
+	public void searchSuperGet(String string) {
+		policyAndPrivacyTermsOK.click();
+		searchField.sendKeys(string);
 		verMais.click();
-		fecharPropaganda.click();
+		closeFooter.click();
 		paginaDois.click();
 	}
 	
-	public void clickLinkComoAcessoSuperGet() {
+	public void clickComoAcessoMinhaContaSuperGet() {
 		try {
-			comoAcessoSuperGet.click();
+			comoAcessoMinhaContaSuperGet.click();
 		} catch (Exception e) {
-			acessarMinhaContaSuperGet.click();
+			comoAcessoSuperGet.click();
 		}
 	}
 	
-	public void assertTextSuperGet() {
-		driver.switchTo().activeElement();
-		assertEquals("Como acesso a minha conta SuperGet?", assertModalTitle.getText());
-	}
-	
 	public void clickVerMaisContaSuperGet() {
-		OK.click();
+		policyAndPrivacyTermsOK.click();
 		verMaisContaSuperGet.click();
 	}
-
+	
 }
